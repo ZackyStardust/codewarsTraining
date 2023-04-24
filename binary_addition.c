@@ -1,9 +1,7 @@
-#include <stdlib.h>
-#include <string.h>
-#include <stdio.h>
 #include <stdint.h>
+#include <stdlib.h>
 
-size_t	binarylen(int32_t num)
+size_t	binarylen(int64_t num)
 {
 	size_t	len;
 
@@ -16,33 +14,25 @@ size_t	binarylen(int32_t num)
 	return (len);
 }
 
+
 char *binary_add (unsigned a, unsigned b, char *binary)
 { 
   size_t digits = 0;
-  //char *bin = 0;
-  int32_t temp = a + b;
-  int i = 0;
+  uint64_t temp = (uint64_t)a + (uint64_t)b;
   
   if (a + b == 0)
   {
     binary[0] = '0';
     binary[1] = 0;
-    return(binary);
+    return binary;
   }
   digits = binarylen(temp);
-  printf("Sum: %d\nDigits: %zu\n", a+b, digits);
-  //binary = malloc(digits + 1);
-  temp = a + b;
-  binary[digits] = 0;
-  while (digits--)
+  binary[digits--] = 0;
+  while (temp > 0)
   {
-    if ((temp >> i & 1) == 1)
-      binary[digits] = '1';
-    else
-      binary[digits] = '0';
-    i++;
+    binary[digits] = (temp % 2) + 48;
+    temp /= 2;
+    digits--;
   }
-  //printf("%d, %d --> \"%s\" (%d + %d = %d in decimal or %s in binary)\n", a, b, binary, a, b, a+b, binary);
-  //binary = int_to_bin(a + b);
-	return (binary);
+ 	return binary;
 }
