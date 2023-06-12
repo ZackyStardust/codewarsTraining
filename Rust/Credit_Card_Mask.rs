@@ -29,7 +29,6 @@ fn maskify(cc: &str) -> String {
     }
     for (i, c) in cc.chars().enumerate() {
         if i < cc.len() - 4 {
-            //ret.replace_range(i..i, "#");
             ret = ret.replacen(c, "#", 1);
         }
     }
